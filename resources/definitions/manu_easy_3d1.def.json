@@ -1,0 +1,48 @@
+{
+    "version": 1,
+    "name": "MANU Easy 3D Printer",
+    "inherits": "fdmprinter",
+    "metadata": {
+        "visible": true,
+        "author": "Mehta Heino Industries Oy",
+        "manufacturer": "Mehta Heino Industries Oy",
+        "file_formats": "text/x-gcode",
+        "supports_usb_connection": true,
+        "machine_extruder_trains":
+        {
+            "0": "manu_easy_extruder_0"
+        }
+    },
+    "overrides": {
+		"machine_name":{
+			"default_value": "MANU Easy 3D Printer"
+		},
+        "machine_heated_bed": {
+            "default_value": false
+        },
+        "machine_width": {
+            "default_value": 250
+        },
+        "machine_height": {
+            "default_value": 210
+        },
+        "machine_depth": {
+            "default_value": 155
+        },
+        "machine_center_is_zero": {
+            "default_value": true
+        },
+        "machine_gcode_flavor": {
+            "default_value": "RepRap (Marlin/Sprinter)"
+        },
+        "machine_start_gcode": {
+            "default_value": "M83 ;relative extrusion mode\n;Pressure advances\nM572 D0 S0.06 ;Pressure advance enabled\nM400 ;Finish all current moves and for pressure advances.\n\n\n;Wipe nozzle before printing\nG1 Z10 F1200 ;Go to wipe position\nG1 X20 Y165 F6000 ;Go to wipe position\nG1 Z0.2 F1200 ;Go to wipe height\nG91 ;relative movement for wipe extrusion\nG1 E10.0 F300	;Extrude 10mm for wipe\nM400 ;wait for moves to finishng\nG90 ;world coordinate position\nG92 E0 ;zero extruder\nG4 S1 ;wait for wipe to drop\nG1 Y140.0 E1 F900 ;Move on bed wipe the nozzle\n;MHI3D CODE END"
+        },
+        "machine_end_gcode": {
+            "default_value": "M83 ;relative extrusion mode\nG28 Z0 ;Home Z\nG91 ;Relative movement for wipe extrusion\nG1 E-2.0 F120 ;Extrude 10mm for wipe\nM400 ; wait for moves to finishng\nG90	;world coordinate position\nG92 E0 ;zero extruder\n\nG28 ;Home\nM104 S0	;Set Extruder Temperature\nM140 S0 ;Set Bed Temperature (Fast) or Configure Bed Heater\nG90	;Set to Absolute Positioning\nM18 X Z E0 ;Disable XZE stepper motors\nG1 Y145 F3000	;Move\nG92 E0 ;Set position\nM107 ;Fan off\nM18 Y ;Disable Y stepper motor"
+        },
+        "machine_shape": {
+            "default_value": "rectangular"
+        }
+    }
+}
